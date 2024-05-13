@@ -14,3 +14,5 @@ AWS_SECRET_ACCESS_KEY=...
 ### Run FastAPI
 
 Simply execute in your terminal: `uvicorn main:app --reload`
+
+To test your application, open your browser at `localhost:8000` (http://127.0.0.1 in Windows)
