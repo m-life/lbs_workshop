@@ -1,6 +1,11 @@
 from fastapi import FastAPI, UploadFile, File
 from config import Settings, get_settings
-from service import get_client, list_files, upload_file_to_s3
+from service import (
+    get_client,
+    list_files,
+    upload_file_to_s3,
+    generate_presigned_url
+)
 
 # -- START FAST-API INITIAL CONFIG -- #
 settings: Settings = get_settings()
@@ -30,5 +35,15 @@ def upload_file(file: UploadFile = File(...)):
         file=file,
     )
 
-# @app.get("/retrieve-file-link")
-# # TODO
+
+@app.get("/retrieve-file-link")
+def get_file_from_s3(my_file: str):
+    s3 = get_client(service='s3', settings=settings)
+    return generate_presigned_url(
+        bucket_name=settings.bucket_name,
+        s3_client=s3,
+        object_name=my_file
+    )
+
+
+# Try to use AWS textract
