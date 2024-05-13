@@ -12,6 +12,7 @@ class Settings(BaseSettings):
 
     # General app Info
     app_title: str = 'LBS'
+    bucket_name: str = 'lbs-team-0'
 
     # AWS connections
     aws_access_key_id: str = '<KEY>'
