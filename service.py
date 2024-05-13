@@ -1,6 +1,6 @@
 import boto3
 from config import Settings
-
+from fastapi import UploadFile
 
 def get_client(service: str, settings: Settings):
     session = boto3.session.Session(
@@ -8,6 +8,11 @@ def get_client(service: str, settings: Settings):
         aws_secret_access_key=settings.aws_secret_access_key.get_secret_value(),
     )
     return session.client(service, region_name='eu-west-1')
+
+
+def upload_file_to_s3(s3_client, object_name, bucket_name, file: UploadFile):
+    s3_client.upload_fileobj(file.file, bucket_name, object_name)
+    return object_name
 
 
 def list_files(s3_client, bucket_name):
