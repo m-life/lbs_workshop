@@ -1,20 +1,12 @@
-import os
-import boto3
-from dotenv import load_dotenv
+from fastapi import FastAPI
+from config import Settings, get_settings
 
-load_dotenv('dev.env')
+# -- START FAST-API INITIAL CONFIG -- #
+settings: Settings = get_settings()
 
-
-def get_s3_client():
-    session = boto3.session.Session(
-        aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-        aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
-    )
-    return session.client('s3', region_name='eu-west-1')
+app = FastAPI()
 
 
-def upload_file(file_name, bucket, object_name):
-    s3_client = get_s3_client()
-    response = s3_client.upload_file(file_name, bucket, object_name)
-    print(f'Uploaded {file_name} to s3://{bucket}/{object_name}')
-    return response
+@app.get("/")
+def read_root():
+    return {"Hello": f"World! My app is {settings.app_title}"}
