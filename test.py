@@ -20,3 +20,4 @@ result_info = get_text_with_info(result)
 result_info_completed = get_text_with_line_spacing_info(result_info)
 test_paragraph = extract_paragraphs_only(result_info_completed)
 paragraphs = get_paragraphs_based_on_period(result_info_completed)
+
