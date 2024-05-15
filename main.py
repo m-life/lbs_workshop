@@ -1,5 +1,8 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Depends
 from config import Settings, get_settings
+from sqlalchemy.orm import Session
+from sqlalchemy.sql import text
+from lib.db import get_db
 from service import (
     get_client,
     list_files,
@@ -46,4 +49,8 @@ def get_file_from_s3(my_file: str):
     )
 
 
-# Try to use AWS textract
+@app.get("/test-db")
+def test_db_connection(db: Session = Depends(get_db)):
+    query = text("select * from team0.documents")
+    test_query = db.execute(query).all()
+    print(test_query)

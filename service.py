@@ -2,6 +2,7 @@ import boto3
 from config import Settings
 from fastapi import UploadFile
 
+
 def get_client(service: str, settings: Settings):
     session = boto3.session.Session(
         aws_access_key_id=settings.aws_access_key_id,

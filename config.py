@@ -16,14 +16,14 @@ class Settings(BaseSettings):
 
     # AWS connections
     aws_access_key_id: str = '<KEY>'
-    aws_secret_access_key: SecretStr = '<KEY>'
+    aws_secret_access_key: SecretStr
 
     # Database connection
-    # db_host: str
-    # db_port: int
-    # postgres_db: str
-    # postgres_user: str
-    # postgres_password: SecretStr
+    db_host: str = 'lbs-workshop.czywy0oecga7.eu-west-1.rds.amazonaws.com'
+    db_port: int = 5432
+    postgres_db: str = 'lbs'
+    postgres_user: str = 'lbs_user'
+    postgres_password: SecretStr
     db_pool_size: Optional[int] = None
     db_max_connections: int = 80
     web_concurrency: int = 1

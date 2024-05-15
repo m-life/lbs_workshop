@@ -3,3 +3,5 @@ botocore
 fastapi==0.109.1
 pydantic==1.10.12
 uvicorn
+psycopg2-binary
+SQLAlchemy
