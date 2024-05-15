@@ -52,5 +52,6 @@ def get_file_from_s3(my_file: str):
 @app.get("/test-db")
 def test_db_connection(db: Session = Depends(get_db)):
     query = text("select * from team0.documents")
-    test_query = db.execute(query).all()
-    print(test_query)
+    res = db.execute(query).all()
+    return [row[1] for row in res]
+
